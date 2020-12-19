@@ -2,6 +2,19 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool')
 
+router.get('/:id', (req, res) => {
+  console.log('in GET id route movie.router.js', req.body);
+  const queryText = `SELECT * FROM movies WHERE id = $1`
+  pool.query(queryText, [req.params.id])
+  .then((result) => {
+    res.send(result.rows);
+  })
+  .catch((error) => {
+    console.log('Error in GET/:id route in movie.router.js', error);
+    res.sendStatus(500);
+  })
+})
+
 router.get('/', (req, res) => {
   console.log('in GET route movie.router.js');
   const queryText = 'SELECT * FROM movies ORDER BY title ASC'
@@ -14,6 +27,7 @@ router.get('/', (req, res) => {
     res.sendStatus(500);
   });
 });
+
 
 router.post('/', (req, res) => {
   console.log(req.body);

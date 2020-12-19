@@ -12,7 +12,7 @@ class App extends Component {
         <h1>Movies!</h1>
         <Router>
           <Route exact path="/" component={MovieGallery} />
-          <Route exact path="/details" component={MovieGalleryDetails}/>
+          <Route path="/details/:id" component={MovieGalleryDetails}/>
         </Router>
       </div>
     );
