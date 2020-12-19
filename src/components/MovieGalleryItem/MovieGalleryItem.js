@@ -8,7 +8,8 @@ class MovieGallery extends Component {
    render() {
       return (
          <div className="movie-gallery-item">
-             <img src={this.props.movie.poster}/>
+             <img title="Click to View Details" src={this.props.movie.poster} alt={this.props.movie.title}/>
+             <p>Click to View Details</p>
          </div>
       );
    }
