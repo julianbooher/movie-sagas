@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {HashRouter as Router, Route} from 'react-router-dom';
+import MovieGallery from '../MovieGallery/MovieGallery'
 import './App.css';
 
 class App extends Component {
@@ -9,9 +10,8 @@ class App extends Component {
       <div className="App">
         <h1>Movies!</h1>
         <Router>
-          {/* ADD PAGES! */}
+          <Route exact path="/" component={MovieGallery} />
         </Router>
-        <p>Empty Page</p>
       </div>
     );
   }
