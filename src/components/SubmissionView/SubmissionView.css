@@ -11,3 +11,8 @@
     margin-right: auto;
     margin-bottom: .5em;
 }
+
+.movie-form textarea{
+    height: 270px;
+    width: 270px;
+}

@@ -4,3 +4,13 @@
     margin-left: auto;
     margin-right: auto;
 }
+
+.movie-details-item img{
+    max-height: 274px;
+}
+
+.genres-title{
+    font-size: 2em;
+    margin-top: .5em;
+    margin-bottom: .5em;
+}

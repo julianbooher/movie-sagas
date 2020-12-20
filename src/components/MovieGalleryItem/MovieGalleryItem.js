@@ -6,11 +6,6 @@ import './MovieGalleryItem.css'
 
 class MovieGalleryItem extends Component {
 
-    // TODO onClick function to bring the user to the details page
-    // need get route for individual movie
-    // set reduxState of selected movie to this item's details
-    // use this.props.history.push('/details')
-
     goToDetails = () => {
         console.log('in goToDetails', this.props.movie.id);
         this.props.history.push({pathname: `/details`, state: {movieId: this.props.movie.id}})

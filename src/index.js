@@ -22,8 +22,8 @@ function* rootSaga() {
     yield takeEvery("FETCH_DETAILS_GENRES", fetchDetailsGenresSaga)
 }
 
+// POST route for adding a movie to the database, sends it to the router.
 function* addMovieSaga(action){
-    console.log('in addMovieSaga');
     try{
         yield axios.post('/api/movie/', action.payload) 
     } catch (error) {
@@ -31,6 +31,7 @@ function* addMovieSaga(action){
     }
 }
 
+// GET route to get all of the genres in the DB, sends them to redux store.
 function* fetchGenresSaga(){
     try{
         const response = yield axios.get('/api/genre');
@@ -40,8 +41,8 @@ function* fetchGenresSaga(){
     }
 }
 
+// GET route to get all of the genres for a particular movie, then stores it in redux.
 function* fetchDetailsGenresSaga(action){
-    console.log('in fetchDetailsGenresSaga', action.payload)
     try{
         const response = yield axios.get(`/api/movie/genres/${action.payload}`)
         yield put({type: 'SET_DETAILS_GENRES', payload: response.data})
@@ -50,8 +51,8 @@ function* fetchDetailsGenresSaga(action){
     }
 }
 
+// GET route to get all of the details for a particular movie, stores it in redux.
 function* fetchDetailsSaga(action){
-    console.log('in fetchDetailsSaga', action.payload);
     try {
         const response = yield axios.get(`/api/movie/${action.payload}`)
         yield put ({type: 'SET_DETAILS', payload: response.data})
@@ -60,9 +61,8 @@ function* fetchDetailsSaga(action){
     }
 }
 
-// TODO finish setting up this saga
+// GET route to get an array of every movie in the DB.
 function* fetchMoviesSaga(){
-    console.log('in fetchMoviesSaga');
     try {
         const response = yield axios.get('/api/movie');
         yield put({ type: 'SET_MOVIES', payload: response.data })
@@ -78,10 +78,8 @@ const sagaMiddleware = createSagaMiddleware();
 const details = (state = {}, action) => {
     switch(action.type) {
         case 'SET_DETAILS':
-            console.log('inside details redux', action.payload[0])
             return {...state, ...action.payload[0]}
         case 'SET_DETAILS_GENRES':
-            console.log('inside SET_DETAILS_GENRES', action.payload)
             return {...state, genres: action.payload}
         default: 
             return state;

@@ -1,0 +1,39 @@
+header {
+    padding: 2em;
+    color: white;
+    background-color: black;
+    margin-bottom: 1em;
+
+}
+header ul {
+    padding-left: 0;
+}
+
+header li {
+    display: inline-block;
+    list-style: none;
+    margin-left: .25em;
+    margin-right: .25em;
+    font-size: 1em;
+    color: white;
+}
+
+header a{
+    text-decoration: none;
+}
+
+header a:link{
+    color: white;
+}
+
+header a:visited{
+    color: white;
+}
+
+header a:hover{
+    color: lightblue;
+}
+
+header img{
+    margin-bottom: .25em;
+}

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Link, HashRouter as Router, Route} from 'react-router-dom';
+import {HashRouter as Router, Route} from 'react-router-dom';
 import MovieGallery from '../MovieGallery/MovieGallery'
 import MovieGalleryDetails from '../MovieGalleryDetails/MovieGalleryDetails'
 import SubmissionView from '../SubmissionView/SubmissionView'
+import Header from '../Header/Header'
 import './App.css';
 
 class App extends Component {
@@ -10,14 +11,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Movies!</h1>
         <Router>
-        <nav>
-          <ul>
-            <li><Link to ="/">Gallery Home</Link></li>
-            <li><Link to ="/submission">Submit a Movie</Link></li>
-          </ul>
-        </nav>
+          <Header />
           <Route exact path="/" component={MovieGallery} />
           <Route path="/details" component={MovieGalleryDetails}/>
           <Route path="/submission" component={SubmissionView}/>

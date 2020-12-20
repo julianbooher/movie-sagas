@@ -12,47 +12,47 @@ class SubmissionView extends Component {
 
    state = defaultState;
 
+   // get the genres and put them in redux.
    componentDidMount() {
       this.props.dispatch({type: 'FETCH_GENRES'});
-      console.log('reduxState submissionView', this.props.genres);
    }
 
-  // TODO - Selector for genre
-  handleChangeFor = (event, inputName) => {
-     this.setState({
-     [inputName]: event.target.value
-     })
-   
+   handleChangeFor = (event, inputName) => {
+      this.setState({
+      [inputName]: event.target.value
+      })
   }
 
   handleSubmit = (event) => {
      event.preventDefault();
-     console.log('inside handleSubmit')
+     // dispatch to redux on submit.
+     // TODO add input validation.
      this.props.dispatch({type: 'ADD_MOVIE', payload: this.state})
      this.setState(defaultState)
-
   }
 
   render() {
     return (
        <div>
-          {JSON.stringify(this.state)}
-          <br></br>
-          {JSON.stringify(this.props.genres)}
+          <h1>Submit a Movie</h1>
           <form onSubmit={this.handleSubmit} className="movie-form">
-             <input 
+             <input
+               required 
                value={this.state.title} 
                onChange={(event) => this.handleChangeFor(event, 'title')} 
                placeholder="Title"/>
-             <input 
+             <input
+               required 
                value={this.state.poster} 
                onChange={(event) => this.handleChangeFor(event, 'poster')} 
                placeholder="Poster URL"/>
-             <input 
+             <textarea
+               required 
                value={this.state.description} 
                onChange={(event) => this.handleChangeFor(event, 'description')} 
                placeholder="description"/>
-             <select 
+             <select
+               required 
                value={this.state.genre_id} 
                onChange={(event) => this.handleChangeFor(event, 'genre_id')}>
                <option hidden value="">Genre</option>
@@ -66,8 +66,10 @@ class SubmissionView extends Component {
 
           </form>
           {/* This preview is to ensure the poster looks good before the user submits it. */}
-          <h1>Poster Preview</h1>
+          <h1>Movie Info Preview</h1>
+          <h1>{this.state.title}</h1>
           <img src={this.state.poster} alt={this.state.poster}></img>
+          <p>{this.state.description}</p>
        </div>
        
     );
