@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import './SubmissionView.css'
+const defaultState = {
+   genre_id: '',
+   title: '',
+   poster: '',
+   description: ''
+}
 
 class SubmissionView extends Component {
 
-   state = {
-      genreId: '',
-      title: '',
-      poster: '',
-      description: ''
-   }
+   state = defaultState;
 
    componentDidMount() {
       this.props.dispatch({type: 'FETCH_GENRES'});
@@ -27,6 +28,8 @@ class SubmissionView extends Component {
   handleSubmit = (event) => {
      event.preventDefault();
      console.log('inside handleSubmit')
+     this.props.dispatch({type: 'ADD_MOVIE', payload: this.state})
+     this.setState(defaultState)
 
   }
 
@@ -50,8 +53,8 @@ class SubmissionView extends Component {
                onChange={(event) => this.handleChangeFor(event, 'description')} 
                placeholder="description"/>
              <select 
-               value={this.state.genreId} 
-               onChange={(event) => this.handleChangeFor(event, 'genreId')}>
+               value={this.state.genre_id} 
+               onChange={(event) => this.handleChangeFor(event, 'genre_id')}>
                <option hidden value="">Genre</option>
                 {this.props.genres.map((genre) => {
                    return(

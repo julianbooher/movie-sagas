@@ -21,3 +21,7 @@
     transform: translate(-50%, -50%);
     visibility: hidden;
   }
+
+.movie-gallery img{
+    max-height: 273px;
+}
