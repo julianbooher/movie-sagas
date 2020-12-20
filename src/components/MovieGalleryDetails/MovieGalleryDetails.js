@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {useParams} from 'react-router-dom'
 import './MovieGalleryDetails.css'
 
 
 class MovieGalleryDetails extends Component {
 
    render() {
+      const currentMovie = this.props.reduxState.details[0]
+      console.log('currentMovie const', currentMovie)
 
-      let { id } = useParams();
       return (
-         <div className="movie-gallery-item">
-             <h1>Hello from MovieGalleryDetails</h1>
-             <h1>ID: {id}</h1>
-         </div>
+         <>
+             {currentMovie !== undefined &&
+            <div className="movie-details-item">
+               <h1>{currentMovie.title}</h1>
+               <img src={currentMovie.poster} alt={currentMovie.title}/>
+               <p>{currentMovie.description}</p>
+            </div>
+             }
+         </>
       );
    }
 

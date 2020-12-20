@@ -1,23 +1,5 @@
-/* .movie-gallery-item{
-    display: inline-block;
-    margin: 1em;
-    position: relative;
-    
+.movie-details-item{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }
-
-.movie-gallery-item:hover img{
-    opacity: 20%;
-}
-
-.movie-gallery-item:hover p{
-    visibility: visible;
-}
-
-.movie-gallery p{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80%;
-    transform: translate(-50%, -50%);
-    visibility: hidden;
-  } */

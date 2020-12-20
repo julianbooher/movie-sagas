@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter } from 'react-router-dom';
 import './MovieGalleryItem.css'
 
 
@@ -10,17 +11,21 @@ class MovieGalleryItem extends Component {
     // set reduxState of selected movie to this item's details
     // use this.props.history.push('/details')
 
+    addDetails = () => {
+        console.log('in goToDetails', this.props.movie.id);
+        this.props.dispatch({type: 'FETCH_DETAILS', payload: this.props.movie.id});
+        this.goToDetails();
+    }
+
     goToDetails = () => {
-        console.log('in goToDetails', this.props.movie.id)
-        // this.props.dispatch({type: 'FETCH_DETAILS', payload: this.props.movie.id})
-        // this.props.history.push(`/details`)
+        this.props.history.push(`/details`)
     }
 
    render() {
       return (
-            <div onClick={this.goToDetails} className="movie-gallery-item">
+            <div onClick={this.addDetails} className="movie-gallery-item">
                 <img title="Click to View Details" src={this.props.movie.poster} alt={this.props.movie.title}/>
-                <p>Click to View Details</p>
+                {<p>View Details</p>}
             </div>
       );
    }
@@ -31,4 +36,4 @@ const mapStateToProps = (reduxState) => ({
     reduxState
 })
 
-export default connect(mapStateToProps)(MovieGalleryItem);
+export default connect(mapStateToProps)(withRouter(MovieGalleryItem));

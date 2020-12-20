@@ -20,6 +20,16 @@ function* rootSaga() {
 }
 
 
+function* fetchDetailsSaga(action){
+    console.log('in fetchDetailsSaga', action.payload);
+    try {
+        const response = yield axios.get(`/api/movie/${action.payload}`)
+        yield put ({type: 'SET_DETAILS', payload: response.data})
+    } catch (error){
+        console.log('Error in fetchDetailsSaga', error);
+    }
+}
+
 // TODO finish setting up this saga
 function* fetchMoviesSaga(){
     console.log('in fetchMoviesSaga');
@@ -38,6 +48,7 @@ const sagaMiddleware = createSagaMiddleware();
 const details = (state = [], action) => {
     switch(action.type) {
         case 'SET_DETAILS':
+            console.log('inside details redux', action.payload)
             return action.payload;
         default: 
             return state;
