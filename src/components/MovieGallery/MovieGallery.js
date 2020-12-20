@@ -13,8 +13,6 @@ class MovieGallery extends Component {
    render() {
       return (
          <div className="movie-gallery">
-             <h1>Hello from movie gallery</h1>
-             {/* {JSON.stringify(this.props.reduxState.movies)} */}
              {this.props.reduxState.movies.map(
                  (movie) => {
                      return(

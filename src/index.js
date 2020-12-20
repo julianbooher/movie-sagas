@@ -17,8 +17,18 @@ import axios from 'axios';
 function* rootSaga() {
     yield takeEvery("FETCH_MOVIES", fetchMoviesSaga)
     yield takeEvery("FETCH_DETAILS", fetchDetailsSaga)
+    yield takeEvery("FETCH_DETAILS_GENRES", fetchDetailsGenresSaga)
 }
 
+function* fetchDetailsGenresSaga(action){
+    console.log('in fetchDetailsGenresSaga', action.payload)
+    try{
+        const response = yield axios.get(`/api/movie/genres/${action.payload}`)
+        yield put({type: 'SET_DETAILS_GENRES', payload: response.data})
+    } catch (error){
+        console.log('Error in fetchDetailsGenresSaga', error)
+    }
+}
 
 function* fetchDetailsSaga(action){
     console.log('in fetchDetailsSaga', action.payload);
@@ -50,6 +60,9 @@ const details = (state = [], action) => {
         case 'SET_DETAILS':
             console.log('inside details redux', action.payload)
             return action.payload;
+        case 'SET_DETAILS_GENRES':
+            console.log('inside SET_DETAILS_GENRES', action.payload)
+            return [...state, action.payload]
         default: 
             return state;
     }

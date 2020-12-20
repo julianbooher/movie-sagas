@@ -1,5 +1,6 @@
 .movie-details-item{
-    width: 50%;
+    width: 90%;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
