@@ -13,9 +13,7 @@ class MovieGalleryItem extends Component {
 
     goToDetails = () => {
         console.log('in goToDetails', this.props.movie.id);
-        this.props.dispatch({type: 'FETCH_DETAILS', payload: this.props.movie.id});
-        this.props.dispatch({type: 'FETCH_DETAILS_GENRES', payload: this.props.movie.id})
-        this.props.history.push(`/details`)
+        this.props.history.push({pathname: `/details`, state: {movieId: this.props.movie.id}})
     }
 
    render() {

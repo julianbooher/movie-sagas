@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {withRouter } from 'react-router-dom';
 import './MovieGalleryDetails.css'
 
 
 class MovieGalleryDetails extends Component {
+
+   state = this.props.location.state
+
+   componentDidMount = () => {
+      if (this.state){
+         this.props.dispatch({type: 'FETCH_DETAILS', payload: this.state.movieId});
+         this.props.dispatch({type: 'FETCH_DETAILS_GENRES', payload: this.state.movieId})
+      }
+   }
 
    returnToGallery = () => {
       console.log('inside returnToGallery')
@@ -24,27 +34,20 @@ class MovieGalleryDetails extends Component {
    }
 
    render() {
-      // This holds the movie details (title, image, description).
-      const currentMovie = this.props.reduxState.details[0]
-      // This holds the genres in an array.
-      const currentMovieGenres = this.props.reduxState.details[1]
-      // Variable to put in the return that displays the genres.
-      let genreString = this.createGenreString(currentMovieGenres);
-      console.log('currentMovie const', currentMovie)
-      console.log('currentMovie const', currentMovieGenres)
 
       return (
          <>
+         {JSON.stringify(this.props.reduxState.details)}
             {/* Without this conditional, the variable is undefined because of how the page loads. */}
-            {currentMovie !== undefined && currentMovieGenres !== undefined &&
+            {this.state && 
             <div className="movie-details-item">
-               <h1>{currentMovie.title}</h1>
-               <img src={currentMovie.poster} alt={currentMovie.title}/>
+               <h1>{this.props.reduxState.details.title}</h1>
+               <img src={this.props.reduxState.details.poster} alt={this.props.reduxState.details.title}/>
                <p>Genres</p>
-               <p>{genreString} </p>
-               {/* {currentMovieGenres.map} */}
-               <p>{currentMovie.description}</p>
-            </div>}
+               {this.createGenreString(this.props.reduxState.details.genres)}
+               <p>{this.props.reduxState.details.description}</p>
+            </div>
+            }
             <button onClick={this.returnToGallery}>Return to Gallery</button>
          </>
       );
@@ -56,4 +59,4 @@ const mapStateToProps = (reduxState) => ({
     reduxState
 })
 
-export default connect(mapStateToProps)(MovieGalleryDetails);
+export default connect(mapStateToProps)(withRouter(MovieGalleryDetails));

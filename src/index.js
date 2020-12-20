@@ -75,14 +75,14 @@ function* fetchMoviesSaga(){
 const sagaMiddleware = createSagaMiddleware();
 
 // Used to store movie details for the selected movie.
-const details = (state = [], action) => {
+const details = (state = {}, action) => {
     switch(action.type) {
         case 'SET_DETAILS':
-            console.log('inside details redux', action.payload)
-            return action.payload;
+            console.log('inside details redux', action.payload[0])
+            return {...state, ...action.payload[0]}
         case 'SET_DETAILS_GENRES':
             console.log('inside SET_DETAILS_GENRES', action.payload)
-            return [...state, action.payload]
+            return {...state, genres: action.payload}
         default: 
             return state;
     }
