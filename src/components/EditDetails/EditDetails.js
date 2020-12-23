@@ -57,13 +57,6 @@ class EditDetails extends Component {
       return (
          <>
             <h1>state</h1>
-            {JSON.stringify(this.state)}
-            <br></br>
-            <h1>redux</h1>
-            {JSON.stringify(this.props.reduxState.details)}
-            <h1>genres</h1>
-            {JSON.stringify(this.props.reduxState.genres)}
-
             <h1>Updated Details Preview</h1>
             <h1>{this.state.title}</h1>
             <img src={this.state.poster} alt={this.state.poster}></img>
