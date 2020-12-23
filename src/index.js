@@ -75,7 +75,16 @@ function* fetchMoviesSaga(){
 const sagaMiddleware = createSagaMiddleware();
 
 // Used to store movie details for the selected movie.
-const details = (state = {}, action) => {
+const details = (state = {
+    id: null,
+    title: '',
+    poster: '',
+    description: '',
+    genres: [{
+        name: '',
+        id: null
+    }]
+}, action) => {
     switch(action.type) {
         case 'SET_DETAILS':
             return {...state, ...action.payload[0]}
