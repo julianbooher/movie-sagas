@@ -36,8 +36,15 @@ class EditDetails extends Component {
    handleSubmit = (event) => {
       event.preventDefault();
       console.log('inside handleSubmit')
+      this.props.dispatch({type: 'UPDATE_MOVIE', payload: this.state})
    }
 
+
+   // Button to take the user back to the details page.
+   returnToDetails = () => {
+      console.log('inside returnToDetails')
+      this.props.history.push({pathname: `/details`, state: {movieId: this.state.id}})
+   }
 
    // Button to take the user back to the gallery.
    returnToGallery = () => {
@@ -89,8 +96,10 @@ class EditDetails extends Component {
                    )
                 })}
              </select>
-             <button type="submit">Submit Film</button>
+             <button type="submit">Submit Update</button>
           </form>
+          <button onClick={this.returnToGallery}>Return to Gallery</button>
+          <button onClick={this.returnToDetails}>Return to Details Page</button>
          </>
       );
    }

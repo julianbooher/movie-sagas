@@ -9,17 +9,27 @@ import { Provider } from 'react-redux';
 import logger from 'redux-logger';
 // Import saga middleware
 import createSagaMiddleware from 'redux-saga';
-import { takeEvery, put } from "redux-saga/effects";
+import { takeEvery, put, call } from "redux-saga/effects";
 import axios from 'axios';
 
 
 // Create the rootSaga generator function
 function* rootSaga() {
     yield takeEvery("ADD_MOVIE", addMovieSaga)
+    yield takeEvery("UPDATE_MOVIE", updateMovieSaga)
     yield takeEvery("FETCH_GENRES", fetchGenresSaga)
     yield takeEvery("FETCH_MOVIES", fetchMoviesSaga)
     yield takeEvery("FETCH_DETAILS", fetchDetailsSaga)
     yield takeEvery("FETCH_DETAILS_GENRES", fetchDetailsGenresSaga)
+}
+
+// PUT route for updating a movie.
+function* updateMovieSaga(action){
+    try {
+        yield axios.put('/api/movie', action.payload)
+    } catch (error) {
+        console.log('Error in updateMovieSaga')
+    }
 }
 
 // POST route for adding a movie to the database, sends it to the router.

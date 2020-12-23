@@ -82,4 +82,40 @@ router.post('/', (req, res) => {
   })
 })
 
+router.put('/', (req, res) => {
+  console.log('in put route', req.body);
+  // RETURNING "id" will give us back the id of the created movie
+  const updateMovieQuery = `
+  UPDATE movies
+  SET title = $1, poster = $2, description = $3
+  WHERE id = $4;`
+
+  // FIRST QUERY MAKES MOVIE
+  pool.query(updateMovieQuery, [req.body.title, req.body.poster, req.body.description, req.body.id])
+  .then(result => {
+    
+
+    // Depending on how you make your junction table, this insert COULD change.
+    const insertMovieGenreQuery = `
+      UPDATE movies_genres
+      SET genres_id = $1
+      WHERE movies_id = $2;
+      `
+      // SECOND QUERY MAKES GENRE FOR THAT NEW MOVIE
+      pool.query(insertMovieGenreQuery, [req.body.genre_id, req.body.id]).then(result => {
+        //Now that both are done, send back success!
+        res.sendStatus(201);
+      }).catch(err => {
+        // catch for second query
+        console.log(err);
+        res.sendStatus(500)
+      })
+
+// Catch for first query
+  }).catch(err => {
+    console.log(err);
+    res.sendStatus(500)
+  })
+})
+
 module.exports = router;
