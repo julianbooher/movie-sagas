@@ -17,7 +17,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/genres/:id', (req, res) => {
   console.log('in GET genres/id route movie.router.js', req.body);
-  const queryText = `SELECT genres.name FROM movies
+  const queryText = `SELECT genres.name AS name, genres.id AS id FROM movies
   JOIN movies_genres ON movies_genres.movies_id = movies.id
   JOIN genres ON movies_genres.genres_id = genres.id
   WHERE movies.id=$1;`

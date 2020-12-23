@@ -3,6 +3,7 @@ import {HashRouter as Router, Route} from 'react-router-dom';
 import MovieGallery from '../MovieGallery/MovieGallery'
 import MovieGalleryDetails from '../MovieGalleryDetails/MovieGalleryDetails'
 import SubmissionView from '../SubmissionView/SubmissionView'
+import EditDetails from '../EditDetails/EditDetails'
 import Header from '../Header/Header'
 import './App.css';
 
@@ -16,6 +17,7 @@ class App extends Component {
           <Route exact path="/" component={MovieGallery} />
           <Route path="/details" component={MovieGalleryDetails}/>
           <Route path="/submission" component={SubmissionView}/>
+          <Route path="/edit" component={EditDetails}/>
         </Router>
       </div>
     );

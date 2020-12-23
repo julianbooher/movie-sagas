@@ -25,6 +25,11 @@ class MovieGalleryDetails extends Component {
       this.props.history.push('/')
    }
 
+   // Button to take the user to the edit details page
+   editDetails = () => {
+      this.props.history.push('/edit');
+   }
+
    // this creates the list of genres to be displayed below the movie poster.
    createGenreString = (genreArray) => {
       let returnString = '| '
@@ -54,7 +59,9 @@ class MovieGalleryDetails extends Component {
                <p className="description">{this.props.reduxState.details.description}</p>
             </div>
             }
+            <button onClick={this.editDetails}>Edit Movie Details</button>
             <button onClick={this.returnToGallery}>Return to Gallery</button>
+            
          </>
       );
    }
