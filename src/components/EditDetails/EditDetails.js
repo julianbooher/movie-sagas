@@ -72,8 +72,8 @@ class EditDetails extends Component {
                 })}
              </select> */}
              <button type="submit">Submit Film</button>
-
           </form>
+          <h1>Updated Details Preview</h1>
          </>
       );
    }
