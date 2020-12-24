@@ -1,18 +1,4 @@
-.movie-form input{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: .5em;
-}
 
-.movie-form select{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: .5em;
-}
-
-.movie-form textarea{
-    height: 270px;
-    width: 270px;
+.movie-form-textfield {
+    margin-bottom: 1em;
 }

@@ -39,7 +39,6 @@ class EditDetails extends Component {
       this.props.dispatch({type: 'UPDATE_MOVIE', payload: this.state})
    }
 
-
    // Button to take the user back to the details page.
    returnToDetails = () => {
       console.log('inside returnToDetails')
