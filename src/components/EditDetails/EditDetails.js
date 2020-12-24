@@ -2,7 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom';
 import './EditDetails.css'
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import Select from '@material-ui/core/Select';
+import FormControl from '@material-ui/core/FormControl';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
+
+const styles = theme => ({
+   button: {
+     margin: theme.spacing(1),
+   },
+   input: {
+     display: 'none',
+   },
+   formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120,
+   },
+   selectEmpty: {
+      marginTop: theme.spacing(2),
+   },
+   
+ });
 
 class EditDetails extends Component {
 
@@ -12,7 +42,8 @@ class EditDetails extends Component {
       title: '',
       poster: '',
       description: '',
-      genre_id: ''
+      genre_id: '',
+      open: false
    }
 
 
@@ -37,22 +68,30 @@ class EditDetails extends Component {
       event.preventDefault();
       console.log('inside handleSubmit')
       this.props.dispatch({type: 'UPDATE_MOVIE', payload: this.state})
+      this.setState ({
+         open: true
+      })
    }
 
    // Button to take the user back to the details page.
-   returnToDetails = () => {
+   goToDetails = () => {
       console.log('inside returnToDetails')
       this.props.history.push({pathname: `/details`, state: {movieId: this.state.id}})
    }
 
    // Button to take the user back to the gallery.
-   returnToGallery = () => {
+   goToGallery = () => {
       console.log('inside returnToGallery')
       this.props.history.push('/')
    }
 
-   render() {
 
+   handleClose = () => {
+      this.setState({open: false})
+   }
+
+   render() {
+      const { classes } = this.props;   
       return (
          <>
             <h1>state</h1>
@@ -61,37 +100,98 @@ class EditDetails extends Component {
             <img src={this.state.poster} alt={this.state.poster}></img>
             <p>{this.state.description}</p>
             <h1>Edit Movie Details</h1>
+            <Dialog
+               open={this.state.open}
+               onClose={this.handleClose}
+               aria-labelledby="alert-dialog-title"
+               aria-describedby="alert-dialog-description"
+            >
+            <DialogTitle id="alert-dialog-title">{"Movie Details Updated!"}</DialogTitle>
+            <DialogContent>
+               <DialogContentText id="alert-dialog-description">
+               Details for this movie have been updated.
+               </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+               <Button onClick={this.goToGallery} color="primary">
+               Go to Gallery
+               </Button>
+               <Button onClick={this.goToDetails}>Go Back to Movie Details</Button>
+               <Button onClick={this.handleClose} color="primary" autoFocus>
+               Close
+               </Button>
+            </DialogActions>
+         </Dialog>
             <form onSubmit={this.handleSubmit} className="edit-movie-form">
-             <input
+            <div className="edit-movie-form-textfield">
+               <TextField
+                  id="edit-movie-form-title"
+                  required
+                  variant="outlined"
+                  style={{width: 250}}
+                  className={classes.textField}
+                  label="Title" 
+                  value={this.state.title} 
+                  onChange={(event) => this.handleChangeFor(event, 'title')} />
+
+            </div>
+            <div className="edit-movie-form-textfield">
+               <TextField
+                  id="edit-movie-form-url"
+                  required 
+                  variant="outlined"
+                  style={{width: 350}}
+                  className={classes.textField}
+                  value={this.state.poster} 
+                  onChange={(event) => this.handleChangeFor(event, 'poster')} 
+                  label="Poster URL"/>
+            </div>
+            <div className="edit-movie-form-textfield">
+               <TextField
+                  required 
+                  id="edit-movie-form-url"
+                  required 
+                  variant="outlined"
+                  multiline
+                  rows="8"
+                  style={{width: 350}}
+                  className={classes.textField}
+                  value={this.state.description} 
+                  onChange={(event) => this.handleChangeFor(event, 'description')} 
+                  label="Description"/>
+            </div>
+            <div className="edit-movie-form-dropdown">
+               <FormControl 
                required 
-               value={this.state.title} 
-               onChange={(event) => this.handleChangeFor(event, 'title')} 
-               placeholder="Title"/>
-             <input
-               required 
-               value={this.state.poster} 
-               onChange={(event) => this.handleChangeFor(event, 'poster')} 
-               placeholder="Poster URL"/>
-             <textarea
-               required 
-               value={this.state.description} 
-               onChange={(event) => this.handleChangeFor(event, 'description')} 
-               placeholder="description"/>
-             <select
-               required 
-               value={this.state.genre_id} 
-               onChange={(event) => this.handleChangeFor(event, 'genre_id')}>
-               <option hidden value="">Genre</option>   
-                {this.props.reduxState.genres.map((genre) => {
-                   return(
-                      <option key={genre.id} value={genre.id}>{genre.name}</option>
-                   )
-                })}
-             </select>
-             <button type="submit">Submit Update</button>
-          </form>
-          <button onClick={this.returnToGallery}>Return to Gallery</button>
-          <button onClick={this.returnToDetails}>Return to Details Page</button>
+               className={classes.formControl}
+               >
+                  <InputLabel>Genre</InputLabel>
+                  <Select
+                     value={this.state.genre_id}
+                     onChange={(event) => this.handleChangeFor(event, 'genre_id')}>
+                     <MenuItem value="">
+                     <em>Genre</em>
+                     </MenuItem>
+                     {this.props.reduxState.genres.map((genre) => {
+                        return(
+                           <MenuItem key={genre.id} value={genre.id}>{genre.name}</MenuItem>
+                        )
+                     })}
+                  </Select>
+                  <FormHelperText>Required</FormHelperText>
+               </FormControl>
+            </div>
+            <Button 
+               variant="outlined" 
+               color="primary" 
+               type="submit"
+               className={classes.button}>
+                Submit Film
+            </Button>
+
+         </form>
+          <button onClick={this.goToGallery}>Return to Gallery</button>
+          <button onClick={this.goToDetails}>Return to Details Page</button>
          </>
       );
    }
@@ -102,4 +202,4 @@ const mapStateToProps = (reduxState) => ({
     reduxState
 })
 
-export default connect(mapStateToProps)(withRouter(EditDetails));
+export default withStyles(styles)(connect(mapStateToProps)(withRouter(EditDetails)));
