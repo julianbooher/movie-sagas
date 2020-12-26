@@ -108,13 +108,36 @@ router.put('/', (req, res) => {
       }).catch(err => {
         // catch for second query
         console.log(err);
-        res.sendStatus(500)
+        res.sendStatus(500);
       })
 
 // Catch for first query
   }).catch(err => {
     console.log(err);
     res.sendStatus(500)
+  })
+})
+
+router.delete('/:id', (req, res) => {
+  console.log('in DELETE route', req.params.id)
+  // First run a query to delete the movies_genres entry, as that relies on the movie.
+  const deleteMovieGenreQuery = `DELETE FROM movies_genres WHERE movies.id = $1`
+  pool.query(deleteMoviesGenresQuery, [req.params.id])
+  .then(result => {
+    // Then run a query to delete the movie entry itself.
+    const deleteMovieQuery = `DELETE FROM movies WHERE id = $1`
+    pool.query(deleteMovieQuery, [req.params.id])
+    .then(result => {
+      res.sendStatus(200);
+      // error catching for the deleteMovieQuery
+    }).catch (error => {
+      console.log('Error in delete route, deleteMovieQuery', error)
+      res.sendStatus(500);
+    })
+    // error catching for the deleteMovieGenreQuery
+  }).catch (error => {
+    console.log('error in delete route deleteMovieGenreQuery', error);
+    res.sendStatus(500);
   })
 })
 

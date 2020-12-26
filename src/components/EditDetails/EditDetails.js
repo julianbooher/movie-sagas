@@ -128,7 +128,7 @@ class EditDetails extends Component {
                <Button onClick={this.goToGallery} color="primary">
                Go to Gallery
                </Button>
-               <Button onClick={this.goToDetails}>Go Back to Movie Details</Button>
+               <Button onClick={this.goToDetails} color="primary">Go Back to Movie Details</Button>
                <Button onClick={this.handleClose} color="primary" autoFocus>
                <CloseIcon className={classes.leftIcon}/>
                Close

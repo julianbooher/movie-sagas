@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 const styles = theme => ({
@@ -44,6 +45,11 @@ class MovieGalleryDetails extends Component {
    // Button to take the user to the edit details page
    editDetails = () => {
       this.props.history.push('/edit');
+   }
+
+   deleteMovie = () => {
+      console.log('inside deleteMovie', this.props.reduxState.details.id);
+      this.props.dispatch({type: 'DELETE_MOVIE', payload: this.props.reduxState.details.id});
    }
 
    // this creates the list of genres to be displayed below the movie poster.
@@ -92,6 +98,16 @@ class MovieGalleryDetails extends Component {
                <ArrowBackIcon className={classes.leftIcon}/>
                Return to Gallery
             </Button>
+            <div>
+            <Button
+               variant="outlined" 
+               color="secondary"
+               className={classes.button} 
+               onClick={this.deleteMovie}>
+               <DeleteIcon className={classes.leftIcon}/>
+               Delete Movie
+            </Button>
+            </div>
             
          </>
       );
