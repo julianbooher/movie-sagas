@@ -127,8 +127,7 @@ class SubmissionView extends Component {
             <div className="movie-form-textfield">
                <TextField
                   required 
-                  id="movie-form-url"
-                  required 
+                  id="movie-form-url" 
                   variant="outlined"
                   multiline
                   rows="8"

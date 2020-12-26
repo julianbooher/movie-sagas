@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom';
 import './MovieGalleryDetails.css'
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
 
+const styles = theme => ({
+   button: {
+     margin: theme.spacing(1),
+   },
+ });
 
 class MovieGalleryDetails extends Component {
 
@@ -46,6 +53,7 @@ class MovieGalleryDetails extends Component {
    }
 
    render() {
+      const { classes } = this.props;   
 
       return (
          <>
@@ -59,8 +67,20 @@ class MovieGalleryDetails extends Component {
                <p className="description">{this.props.reduxState.details.description}</p>
             </div>
             }
-            <button onClick={this.editDetails}>Edit Movie Details</button>
-            <button onClick={this.returnToGallery}>Return to Gallery</button>
+            <Button
+               variant="outlined" 
+               color="primary"
+               className={classes.button} 
+               onClick={this.editDetails}>
+               Edit Movie Details
+            </Button>
+            <Button
+               variant="outlined" 
+               color="primary"
+               className={classes.button} 
+               onClick={this.returnToGallery}>
+               Return to Gallery
+            </Button>
             
          </>
       );
@@ -72,4 +92,4 @@ const mapStateToProps = (reduxState) => ({
     reduxState
 })
 
-export default connect(mapStateToProps)(withRouter(MovieGalleryDetails));
+export default withStyles(styles)(connect(mapStateToProps)(withRouter(MovieGalleryDetails)));

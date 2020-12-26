@@ -150,7 +150,6 @@ class EditDetails extends Component {
                <TextField
                   required 
                   id="edit-movie-form-url"
-                  required 
                   variant="outlined"
                   multiline
                   rows="8"
