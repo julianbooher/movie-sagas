@@ -15,7 +15,9 @@ class MovieGalleryItem extends Component {
       return (
             <div onClick={this.goToDetails} className="movie-gallery-item">
                 <img title="Click to View Details" src={this.props.movie.poster} alt={this.props.movie.title}/>
-                {<p>View Details</p>}
+                <div>
+                    <p>View Details</p>
+                </div>
             </div>
       );
    }

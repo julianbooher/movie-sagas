@@ -31,7 +31,6 @@ const styles = theme => ({
    selectEmpty: {
       marginTop: theme.spacing(2),
    },
-   
  });
 
 class EditDetails extends Component {
@@ -94,11 +93,12 @@ class EditDetails extends Component {
       const { classes } = this.props;   
       return (
          <>
-            <h1>state</h1>
+         <div className="movie-details-preview">
             <h1>Updated Details Preview</h1>
-            <h1>{this.state.title}</h1>
+            <h3>{this.state.title}</h3>
             <img src={this.state.poster} alt={this.state.poster}></img>
             <p>{this.state.description}</p>
+         </div>
             <h1>Edit Movie Details</h1>
             <Dialog
                open={this.state.open}
@@ -186,12 +186,24 @@ class EditDetails extends Component {
                color="primary" 
                type="submit"
                className={classes.button}>
-                Submit Film
+                Submit Edit
             </Button>
 
          </form>
-          <button onClick={this.goToGallery}>Return to Gallery</button>
-          <button onClick={this.goToDetails}>Return to Details Page</button>
+         <Button
+            variant="outlined" 
+            color="primary"
+            className={classes.button} 
+            onClick={this.goToGallery}>
+            Return to Gallery
+         </Button>
+         <Button
+            variant="outlined" 
+            color="primary"
+            className={classes.button} 
+            onClick={this.goToDetails}>
+            Return to Details Page
+         </Button>
          </>
       );
    }

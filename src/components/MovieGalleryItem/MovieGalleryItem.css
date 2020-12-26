@@ -15,11 +15,12 @@
 
 .movie-gallery p{
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     width: 80%;
     transform: translate(-50%, -50%);
     visibility: hidden;
+    border: 1px solid black;
   }
 
 .movie-gallery img{

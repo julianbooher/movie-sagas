@@ -1,3 +1,10 @@
 .edit-movie-form-textfield {
     margin-bottom: 1em;
 }
+
+.movie-details-preview{
+    width: 90%;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
