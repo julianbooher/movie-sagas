@@ -4,11 +4,20 @@ import {withRouter } from 'react-router-dom';
 import './MovieGalleryDetails.css'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import EditIcon from '@material-ui/icons/Edit';
+
 
 const styles = theme => ({
    button: {
      margin: theme.spacing(1),
    },
+   leftIcon: {
+      marginRight: theme.spacing(1),
+    },
+    rightIcon: {
+      marginLeft: theme.spacing(1),
+    },
  });
 
 class MovieGalleryDetails extends Component {
@@ -72,6 +81,7 @@ class MovieGalleryDetails extends Component {
                color="primary"
                className={classes.button} 
                onClick={this.editDetails}>
+               <EditIcon className={classes.leftIcon}/>
                Edit Movie Details
             </Button>
             <Button
@@ -79,6 +89,7 @@ class MovieGalleryDetails extends Component {
                color="primary"
                className={classes.button} 
                onClick={this.returnToGallery}>
+               <ArrowBackIcon className={classes.leftIcon}/>
                Return to Gallery
             </Button>
             

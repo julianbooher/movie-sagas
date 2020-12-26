@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {withRouter } from 'react-router-dom';
+import ReactDOM from 'react-dom';
 import './EditDetails.css'
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
@@ -9,13 +10,17 @@ import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
 import InputLabel from '@material-ui/core/InputLabel';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import PublishIcon from '@material-ui/icons/Publish';
+import CloseIcon from '@material-ui/icons/Close';
+import FirstPageIcon from '@material-ui/icons/FirstPage';
 
 const styles = theme => ({
    button: {
@@ -31,6 +36,12 @@ const styles = theme => ({
    selectEmpty: {
       marginTop: theme.spacing(2),
    },
+   leftIcon: {
+      marginRight: theme.spacing(1),
+    },
+    rightIcon: {
+      marginLeft: theme.spacing(1),
+    },
  });
 
 class EditDetails extends Component {
@@ -53,7 +64,8 @@ class EditDetails extends Component {
       // Set the state to the stored details in reduxState
       this.setState({
          ...this.props.reduxState.details,
-         genre_id: this.props.reduxState.details.genres[0]["id"]
+         genre_id: this.props.reduxState.details.genres[0]["id"],
+         labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
       });
    }
 
@@ -118,6 +130,7 @@ class EditDetails extends Component {
                </Button>
                <Button onClick={this.goToDetails}>Go Back to Movie Details</Button>
                <Button onClick={this.handleClose} color="primary" autoFocus>
+               <CloseIcon className={classes.leftIcon}/>
                Close
                </Button>
             </DialogActions>
@@ -160,14 +173,28 @@ class EditDetails extends Component {
                   label="Description"/>
             </div>
             <div className="edit-movie-form-dropdown">
-               <FormControl 
+            <FormControl
+               variant="outlined" 
                required 
                className={classes.formControl}
                >
-                  <InputLabel>Genre</InputLabel>
+                  <InputLabel
+                  ref={ref => {
+                     this.InputLabelRef = ref;
+                   }}
+                   htmlFor="outlined-genre-simple">
+                      Genre
+                  </InputLabel>
                   <Select
                      value={this.state.genre_id}
-                     onChange={(event) => this.handleChangeFor(event, 'genre_id')}>
+                     onChange={(event) => this.handleChangeFor(event, 'genre_id')}
+                     input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          name="genre"
+                          id="outlined-genre-simple"
+                        />
+                      }>
                      <MenuItem value="">
                      <em>Genre</em>
                      </MenuItem>
@@ -185,7 +212,8 @@ class EditDetails extends Component {
                color="primary" 
                type="submit"
                className={classes.button}>
-                Submit Edit
+               <PublishIcon className={classes.leftIcon}/>
+               Submit Edit
             </Button>
 
          </form>
@@ -194,6 +222,7 @@ class EditDetails extends Component {
             color="primary"
             className={classes.button} 
             onClick={this.goToGallery}>
+            <FirstPageIcon className={classes.leftIcon}/>
             Return to Gallery
          </Button>
          <Button
@@ -201,6 +230,7 @@ class EditDetails extends Component {
             color="primary"
             className={classes.button} 
             onClick={this.goToDetails}>
+            <ArrowBackIcon className={classes.leftIcon}/>
             Return to Details Page
          </Button>
          </>

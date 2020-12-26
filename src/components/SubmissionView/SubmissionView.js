@@ -2,11 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import './SubmissionView.css'
 import { withStyles } from '@material-ui/core/styles';
+import ReactDOM from 'react-dom';
 import Button from '@material-ui/core/Button';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import MenuItem from '@material-ui/core/MenuItem';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
 import InputLabel from '@material-ui/core/InputLabel';
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,6 +16,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import PublishIcon from '@material-ui/icons/Publish';
+
 
 
 const styles = theme => ({
@@ -30,6 +34,12 @@ const styles = theme => ({
    selectEmpty: {
       marginTop: theme.spacing(2),
    },
+   leftIcon: {
+      marginRight: theme.spacing(1),
+    },
+    rightIcon: {
+      marginLeft: theme.spacing(1),
+    },
    
  });
 
@@ -48,6 +58,9 @@ class SubmissionView extends Component {
    // get the genres and put them in redux.
    componentDidMount() {
       this.props.dispatch({type: 'FETCH_GENRES'});
+      this.setState({
+         labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+       });
    }
 
    handleChangeFor = (event, inputName) => {
@@ -138,14 +151,28 @@ class SubmissionView extends Component {
                   label="Description"/>
             </div>
             <div className="movie-form-dropdown">
-               <FormControl 
+               <FormControl
+               variant="outlined" 
                required 
                className={classes.formControl}
                >
-                  <InputLabel>Genre</InputLabel>
+                  <InputLabel
+                  ref={ref => {
+                     this.InputLabelRef = ref;
+                   }}
+                   htmlFor="outlined-genre-simple">
+                      Genre
+                  </InputLabel>
                   <Select
                      value={this.state.genre_id}
-                     onChange={(event) => this.handleChangeFor(event, 'genre_id')}>
+                     onChange={(event) => this.handleChangeFor(event, 'genre_id')}
+                     input={
+                        <OutlinedInput
+                          labelWidth={this.state.labelWidth}
+                          name="genre"
+                          id="outlined-genre-simple"
+                        />
+                      }>
                      <MenuItem value="">
                      <em>Genre</em>
                      </MenuItem>
@@ -163,7 +190,8 @@ class SubmissionView extends Component {
                color="primary" 
                type="submit"
                className={classes.button}>
-                Submit Film
+               <PublishIcon className={classes.leftIcon}/>
+               Submit Film
             </Button>
 
          </form>
