@@ -50,6 +50,7 @@ class MovieGalleryDetails extends Component {
    deleteMovie = () => {
       console.log('inside deleteMovie', this.props.reduxState.details.id);
       this.props.dispatch({type: 'DELETE_MOVIE', payload: this.props.reduxState.details.id});
+      this.props.history.push('/');
    }
 
    // this creates the list of genres to be displayed below the movie poster.

@@ -121,7 +121,7 @@ router.put('/', (req, res) => {
 router.delete('/:id', (req, res) => {
   console.log('in DELETE route', req.params.id)
   // First run a query to delete the movies_genres entry, as that relies on the movie.
-  const deleteMovieGenreQuery = `DELETE FROM movies_genres WHERE movies.id = $1`
+  const deleteMoviesGenresQuery = `DELETE FROM movies_genres WHERE movies_id = $1`
   pool.query(deleteMoviesGenresQuery, [req.params.id])
   .then(result => {
     // Then run a query to delete the movie entry itself.
@@ -136,7 +136,7 @@ router.delete('/:id', (req, res) => {
     })
     // error catching for the deleteMovieGenreQuery
   }).catch (error => {
-    console.log('error in delete route deleteMovieGenreQuery', error);
+    console.log('error in delete route deleteMoviesGenresQuery', error);
     res.sendStatus(500);
   })
 })

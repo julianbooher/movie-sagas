@@ -74,7 +74,8 @@ class SubmissionView extends Component {
      // dispatch to redux on submit.
      // TODO add input validation.
      this.props.dispatch({type: 'ADD_MOVIE', payload: this.state});
-     this.setState({...defaultState, open: true});
+     this.props.history.push('/');
+   //   this.setState({...defaultState, open: true});
   }
 
   handleClose = () => {
@@ -91,7 +92,7 @@ class SubmissionView extends Component {
       <div>
          {JSON.stringify(this.state)}
          <h1>Submit a Movie</h1>
-         <Dialog
+         {/* <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
@@ -111,7 +112,7 @@ class SubmissionView extends Component {
                Submit Another Movie
                </Button>
             </DialogActions>
-         </Dialog>
+         </Dialog> */}
          
          <form onSubmit={this.handleSubmit} className="movie-form">
             <div className="movie-form-textfield">
