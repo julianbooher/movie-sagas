@@ -7,13 +7,14 @@
 
 ## Description
 
-_Duration: Weekend_
+_Duration: Weekend, plus an additional few hours to add new features_
 
 Web app that allows the user to store all of their movies in a database. The user can submit a movie, or click on the poster in the gallery to view the details about that particular movie.
 
-## Screen Shot
+## Screen Shots
 
-TODO
+![Wireframe](public/images/screenshot-details.png)
+![Wireframe](public/images/screenshot-modal.png)
 
 ## Installation
 
@@ -24,13 +25,14 @@ Download the repository and [node.js](https://nodejs.org/en/download/). With the
 ## Usage
 
 - Main page is the gallery of movies stored in the database.
-- Clicking on a movie poster takes the user to a page where they can view the details about that particular movie.
-- Clicking "submit a movie" in the header takes the user to a page to submit a new movie to the database.
+- Clicking on a movie poster takes the user to a page where they can view the details about that particular movie, or delete it from the database.
+- On the details page, there is an option to edit the details which will take the user to the edit details page. The current details are filled in on the input fields, and the user can update them with a live preview of the changes.
+- Clicking "Submit a Movie" in the header takes the user to a page to submit a new movie to the database.
 - There is a preview section on the submit a movie page, ensuring that the picture the user is uploading will look good!
 
 ## Built With
 
-HTML, CSS, JavaScript, React, React-Redux, React-Redux-Saga, postgresql, Node.js, axios. 
+HTML, CSS, Material-UI, JavaScript, React, React-Redux, React-Redux-Saga, postgresql, Node.js, axios. 
 
 ## Acknowledgement
 Thanks to [Prime Digital Academy](www.primeacademy.io) who equipped and helped me to make this application a reality.
