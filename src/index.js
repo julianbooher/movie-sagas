@@ -26,7 +26,6 @@ function* rootSaga() {
 
 function* deleteMovieSaga(action){
     try{
-        console.log('inside deleteMovieSaga', action.payload);
         yield axios.delete(`/api/movie/${action.payload}`)
         yield put({type: "FETCH_MOVIES"})
     } catch (error) {
