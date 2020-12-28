@@ -25,4 +25,5 @@
 
 .movie-gallery img{
     max-height: 273px;
+    border: 1px solid black;
 }
