@@ -9,16 +9,16 @@ class Header extends Component {
 
    render() {
       return (
+        <div className="header-div">
         <header className="app-header">
-          <h1>Movies!</h1>
+        </header>
           <nav>
             <ul>
               <li><Link to ="/">Gallery Home</Link></li>
               <li><Link to ="/submission">Submit a Movie</Link></li>
             </ul>
           </nav>
-
-        </header>
+          </div>
 
       );
    }

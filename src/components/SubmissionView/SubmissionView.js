@@ -89,7 +89,6 @@ class SubmissionView extends Component {
    const { classes } = this.props;   
    return (
       <div>
-         {JSON.stringify(this.state)}
          <h1>Submit a Movie</h1>
          <Dialog
           open={this.state.open}

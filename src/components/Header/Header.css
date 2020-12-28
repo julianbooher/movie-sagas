@@ -1,47 +1,55 @@
 header {
     padding: 2em;
-    color: white;
-    background-color: black;
+    /* color: white; */
+    /* background-color: black; */
     margin-bottom: 1em;
+    background-image: url("/images/film-reel.png");
+    background-size: auto 100%;
 
 }
 
 .app-header h1{
-    color: rgb(21, 219, 170);
+    color: rgb(223, 87, 24);
     margin-top: 0;
+    margin-bottom: 0;
+    font-size: 3em;
 }
-header ul {
+.header-div ul {
     padding-left: 0;
     margin-bottom: 0;
 }
 
-header li {
+.header-div li {
     display: inline-block;
     list-style: none;
     margin-left: .25em;
     margin-right: .25em;
     font-size: 1em;
     color: white;
-    border: 2px solid white;
+    border: 2px solid black;
     padding: .2em;
 }
-
-header a{
-    text-decoration: none;
-}
-
-header a:link{
-    color: white;
-}
-
-header a:visited{
-    color: white;
-}
-
-header a:hover{
+.header-div li:hover{
+    background-color: black;
     color: lightblue;
 }
 
-header img{
+.header-div li:hover a{
+    color: lightblue;
+}
+
+.header-div a{
+    text-decoration: none;
+}
+
+.header-div a:link{
+    color: black;
+}
+
+.header-div a:visited{
+    color: black;
+}
+
+.header-div img{
     margin-bottom: .25em;
 }

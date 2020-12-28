@@ -87,17 +87,20 @@ class MovieGalleryDetails extends Component {
                variant="outlined" 
                color="primary"
                className={classes.button} 
-               onClick={this.editDetails}>
-               <EditIcon className={classes.leftIcon}/>
-               Edit Movie Details
+               onClick={this.returnToGallery}>
+               <ArrowBackIcon className={classes.leftIcon}/>
+               Return to Gallery
             </Button>
+            
+            {this.state !== null &&
+            <> 
             <Button
                variant="outlined" 
                color="primary"
                className={classes.button} 
-               onClick={this.returnToGallery}>
-               <ArrowBackIcon className={classes.leftIcon}/>
-               Return to Gallery
+               onClick={this.editDetails}>
+               <EditIcon className={classes.leftIcon}/>
+               Edit Movie Details
             </Button>
             <div>
             <Button
@@ -109,6 +112,8 @@ class MovieGalleryDetails extends Component {
                Delete Movie
             </Button>
             </div>
+            </>
+            }
             
          </>
       );

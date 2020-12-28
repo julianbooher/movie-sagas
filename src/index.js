@@ -26,8 +26,9 @@ function* rootSaga() {
 
 function* deleteMovieSaga(action){
     try{
-        yield axios.delete(`/api/movie/${action.payload}`)
-        yield put({type: "FETCH_MOVIES"})
+        yield axios.delete(`/api/movie/${action.payload}`);
+        yield put({type: "FETCH_MOVIES"});
+        yield put ({type: "RESET_DETAILS"});
     } catch (error) {
         console.log('Error in deleteMovieSaga', error)
     }
@@ -111,6 +112,17 @@ const details = (state = {
             return {...state, ...action.payload[0]}
         case 'SET_DETAILS_GENRES':
             return {...state, genres: action.payload}
+        case 'RESET_DETAILS':
+            return {
+                id: null,
+                title: '',
+                poster: '',
+                description: '',
+                genres: [{
+                    name: '',
+                    id: null
+                }]
+            }
         default: 
             return state;
     }

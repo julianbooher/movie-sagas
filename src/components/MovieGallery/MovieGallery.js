@@ -13,6 +13,7 @@ class MovieGallery extends Component {
    render() {
       return (
          <div className="movie-gallery">
+             <h1>Gallery</h1>
              {this.props.reduxState.movies.map(
                  (movie) => {
                      return(
