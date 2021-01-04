@@ -60,7 +60,7 @@ VALUES
 
 -- starter movies_genres
 
-INSERT INTO "movies_genres" ("movie_id", "genre_id")
+INSERT INTO "movies_genres" ("movies_id", "genres_id")
 VALUES
 (1, 2),
 (2, 9),
